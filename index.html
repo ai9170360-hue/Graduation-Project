@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduation Project - Borg Al Arab Technological University</title>
+    <style>
+        /* إعدادات عامة */
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #eef7f7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 950px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        /* تنسيق صور اللوجوهات */
+        .logo-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .uni-logo { max-height: 300px; margin-bottom: 20px; }
+        .project-logo { max-height: 400px;  }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background: #009688;
+            margin: 30px 0;
+            opacity: 0.2;
+        }
+
+        /* ====== البرواز الرئيسي ====== */
+        .main-frame {
+            background: linear-gradient(180deg, #f0fafa 0%, #e6f5f5 100%);
+            border: 2px solid #009688;
+            border-radius: 20px;
+            padding: 30px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.1);
+        }
+
+        /* ===== 1. قسم المشرفين ===== */
+        .supervisor-section {
+            background-color: #a6dbdb; 
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #addbd8;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px 40px;
+            margin-bottom: 20px;
+        }
+
+        .person-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 5px 10px;
+        }
+
+        .avatar-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .person-info { text-align: left; }
+        .person-name { font-weight: bold; font-size: 16px; color: #333; margin: 0 0 4px 0; }
+        .person-role { font-size: 13px; font-weight: 600; margin: 0; }
+        .divider-line { width: 2px; height: 40px; background-color: #d1ece8; }
+
+        /* ===== 2. صف قائد الفريق (منفصل) ===== */
+        .leader-row {
+            background-color: #cefcfa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #d0e6e4;
+        }
+
+        /* ===== 3. قسم الأعضاء (3 أعمدة، كل عمود 9 أعضاء) ===== */
+        .members-section {
+            background-color: #ecfcf9;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #dcedec;
+        }
+
+        .team-grid {
+            display: grid;
+            /* تقسيم الشاشة لـ 3 أعمدة متساوية */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px 20px;
+            text-align: left;
+        }
+
+        .member-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f4fffe;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .member-item:hover {
+            transform: translateX(3px);
+            box-shadow: 0 4px 10px rgba(0,150,136,0.1);
+            border-left: 3px solid #009688;
+            
+        }
+
+        .member-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 13px;
+            flex-shrink: 0;
+            color: rgb(255, 255, 255);
+        }
+
+        .member-details {
+            
+            display: flex;
+            flex-direction: column;
+        }
+        .member-name { font-weight: 600; color: #333; font-size: 13px; }
+        .member-role-text { font-size: 11px; font-weight: bold; }
+
+        /* ===== البوستر ===== */
+        .poster-container {
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #fdfdfd;
+        }
+        .poster-title { color: #009688; font-size: 22px; margin-bottom: 15px; font-weight: bold; }
+        .poster-img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+
+        /* --- إعدادات الخطوط والألوان العامة --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5fbfb;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .project-container {
+            max-width: 1100px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+        }
+
+        /* --- العنوان الرئيسي --- */
+        .main-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #eaf3f3;
+        }
+
+        .main-header h1 {
+            color: #099b8c;
+            font-size: 32px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .main-header h2 {
+            color: #555;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .main-header hr {
+            width: 80px;
+            height: 4px;
+            background: #009688;
+            border: none;
+            margin: 20px auto 0;
+            border-radius: 5px;
+        }
+
+        /* --- تنسيق الأقسام (Cards) --- */
+        .section-block {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            background: #f8fdfd;
+            border-left: 5px solid #009688;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 150, 136, 0.08);
+        }
+
+        .text-content {
+            flex: 1;
+        }
+
+        .text-content h3 {
+            color: #004d40;
+            font-size: 22px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .text-content p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* --- القوائم والشارات --- */
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .features-list li {
+            position: relative;
+            padding-left: 25px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .features-list li::before {
+            content: "✔";
+            color: #009688;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .objectives-list, .steps-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .objectives-list li, .steps-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+            font-size: 14px;
+        }
+
+        .objectives-list li::before { content: "★"; color: #009688; position: absolute; left: 0; }
+        .steps-list li::before { content: "▹"; color: #009688; position: absolute; left: 0; }
+
+        /* --- التقنيات (Tags) --- */
+        .tech-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: #009688;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- الصور --- */
+        .img-content {
+            flex: 0 0 35%;
+            max-width: 300px;
+        }
+
+        .img-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        /* --- قسم الأثر المتوقع (كارت مميز) --- */
+        .impact-section {
+            background: #e0f2f1;
+            border-left: 5px solid #004d40;
+            text-align: center;
+        }
+        
+        .impact-section h3 { color: #004d40; justify-content: center; }
+
+
+        /* ===== تنسيق الجوال (موبايل و تابليت) ===== */
+        @media (max-width: 768px) {
+            .team-grid { grid-template-columns: repeat(2, 1fr); } /* على التابلت يبقى عمودين */
+        }
+        @media (max-width: 600px) {
+            .supervisor-section { flex-direction: column; gap: 15px; }
+            .divider-line { width: 60%; height: 2px; }
+            .person-card { width: 100%; justify-content: center; }
+            .person-info { text-align: center; }
+            .team-grid { grid-template-columns: 1fr; } /* على الموبايل يبقى عمود واحد */
+        
+        }
+
+        @media (max-width: 850px) {
+            .section-block {
+                flex-direction: column;
+                text-align: center;
+            }
+            .img-content {
+                flex: 1;
+                max-width: 100%;
+                order: -1; /* الصورة في الأعلى دائماً على الموبايل */
+            }
+            .features-list {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+            .objectives-list li, .steps-list li, .features-list li {
+                text-align: left;
+            }
+            .main-header h1 { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- اللوجوهات -->
+        <img src="univers.webp" alt="University Logo" class="logo-img uni-logo">
+        <img src="proj-removebg.png" alt="Project Logo" class="logo-img project-logo">
+
+        <hr>
+
+        <!-- ============================================== -->
+        <!-- البرواز الملون                               -->
+        <!-- ============================================== -->
+        <div class="main-frame">
+            
+            <!-- 1. المشرفون -->
+            <div class="supervisor-section">
+                <div class="person-card">
+                    <div class="avatar-circle" style="background-color: #26a69a;">👤</div>
+                    <div class="person-info">
+                        <p class="person-name">Prof. Osama Elnahas</p>
+                        <p class="person-role" style="color: #26a69a;">Project Supervisor</p>
+                    </div>
+                </div>
+                <div class="divider-line"></div>
+                <div class="person-card">
+                    <div class="avatar-circle" style="background-color: #26a69a;">👤</div>
+                    <div class="person-info">
+                        <p class="person-name">ENG. Elhosseny</p>
+                        <p class="person-role" style="color: #26a69a;">Teaching Assistant</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. قائد الفريق (منفصل) -->
+            <div class="leader-row">
+                <div class="person-card" style="justify-content: center;">
+                    <div class="avatar-circle" style="background-color: #004d40;">👤</div>
+                    <div class="person-info" style="text-align: center;">
+                        <p class="person-name leader-name" style="font-size: 18px; color: #004d40;">Omar Tarek Abd Elmohsen</p>
+                        <p class="person-role" style="color: #004d40; font-size: 14px;">Team Leader</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. الأعضاء (3 أعمدة / كل عمود 9 أسماء) -->
+            <div class="members-section">
+                <div class="team-grid">
+                    
+                    <!-- العمود الأول (الأعضاء 1 إلى 9) -->
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">1</div>
+                        <div class="member-details">
+                            <span class="member-name">Ahmed Ibrahim Ismail Khalfallah</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">2</div>
+                        <div class="member-details">
+                            <span class="member-name">Amr Khairy Mohamed Abdelraouf</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">3</div>
+                        <div class="member-details">
+                            <span class="member-name">Omar Elsayed Ibrahim Marzouk</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">4</div>
+                        <div class="member-details">
+                            <span class="member-name">Mostafa Hussein Nono Badran</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">5</div>
+                        <div class="member-details">
+                            <span class="member-name">Amr Saleh Tawfik Ali</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">6</div>
+                        <div class="member-details">
+                            <span class="member-name">Mostafa Mohamed Mostafa Mahmoud</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">7</div>
+                        <div class="member-details">
+                            <span class="member-name">Youssef Kamel Yassin Abdelaty</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">8</div>
+                        <div class="member-details">
+                            <span class="member-name">Mostafa Mohamed Elsayed Ibrahim</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">9</div>
+                        <div class="member-details">
+                            <span class="member-name">Mostafa Eid Hassan Nassar</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+
+                    <!-- العمود الثاني (الأعضاء 10 إلى 18) -->
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">10</div>
+                        <div class="member-details">
+                            <span class="member-name">Ahmed Abdo Ali Abdullah</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">11</div>
+                        <div class="member-details">
+                            <span class="member-name">Mohamed Saad Abdulhamid</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">12</div>
+                        <div class="member-details">
+                            <span class="member-name">Ibrahim Ali Farag Massoud</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">13</div>
+                        <div class="member-details">
+                            <span class="member-name">Baraa Mahmoud Mohamed</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">14</div>
+                        <div class="member-details">
+                            <span class="member-name">Ahmed Abdelrahman Abdelmonem Ghandoour</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">15</div>
+                        <div class="member-details">
+                            <span class="member-name">Mostafa Mahmoud Mahmoud Mohamed</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">16</div>
+                        <div class="member-details">
+                            <span class="member-name">Ibrahim Abdelrahman Abdelmonem Ghandoour</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">17</div>
+                        <div class="member-details">
+                            <span class="member-name">Mostafa Elsayed Mohamed Hussein</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">18</div>
+                        <div class="member-details">
+                            <span class="member-name">Ibrahim Ahmed Mohamed Morsi</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+
+                    <!-- العمود الثالث (الأعضاء 19 إلى 27) -->
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">19</div>
+                        <div class="member-details">
+                            <span class="member-name">Mohamed Ahmed Mohamed Hashem</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">20</div>
+                        <div class="member-details">
+                            <span class="member-name">Abdelrahman Elsayed Abdelbaset</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">21</div>
+                        <div class="member-details">
+                            <span class="member-name">Mohamed Mahmoud Kamel Abdelgawad</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">22</div>
+                        <div class="member-details">
+                            <span class="member-name">Mohamed Hamed Ismail</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">23</div>
+                        <div class="member-details">
+                            <span class="member-name">Ahmed Nagah Ibrahim Ali</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">24</div>
+                        <div class="member-details">
+                            <span class="member-name">Bassem Hamdy Gohar Hamed</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #009688;">25</div>
+                        <div class="member-details">
+                            <span class="member-name">Ahmed Yehia Elsayed Shalaby</span>
+                            <span class="member-role-text" style="color: #009688;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00897b;">26</div>
+                        <div class="member-details">
+                            <span class="member-name">Mahmoud Khalil Elsayed Khalil</span>
+                            <span class="member-role-text" style="color: #00897b;">Team Member</span>
+                        </div>
+                    </div>
+                    <div class="member-item">
+                        <div class="member-num" style="background-color: #00796b;">27</div>
+                        <div class="member-details">
+                            <span class="member-name">Youssef Qassem Mohamed</span>
+                            <span class="member-role-text" style="color: #00796b;">Team Member</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- البوستر                                       -->
+        <!-- ============================================== -->
+        <div class="poster-container">
+            <h2 class="poster-title">📋 Project Details Poster</h2>
+            <img src="poster.jpeg" alt="Project Poster" class="poster-img">
+        </div>
+
+        <div class="project-container">
+
+        <!-- 1. العنوان الرئيسي -->
+        <div class="main-header">
+            <h1>Intelligent Integrated Facility Surveillance System</h1>
+            <h2>Smart Security Powered by Artificial Intelligence</h2>
+            <hr>
+            <p style="margin-top: 20px; color: #666;">
+                An advanced surveillance platform that utilizes Computer Vision and Artificial Intelligence technologies to monitor facilities in real time. The system automatically detects people, objects, and suspicious activities, then instantly notifies security personnel to ensure rapid response and enhanced protection.
+            </p>
+        </div>
+
+        <!-- 2. نبذة عن المشروع -->
+        <div class="section-block">
+            <div class="text-content">
+                <h3>📌 About The Project</h3>
+                <p>Traditional surveillance systems depend heavily on human monitoring, which can result in missed incidents due to fatigue or distraction. Our project introduces an intelligent automated surveillance solution capable of analyzing live video streams, identifying abnormal behavior, and generating instant alerts.</p>
+                <p>The system combines AI-powered object detection, motion analysis, and real-time event recognition to create a smarter and more reliable security environment.</p>
+            </div>
+            <div class="img-content">
+                <!-- صورة الكاميرا والدماغ -->
+                <img src="a.png" alt="AI Camera Concept">
+            </div>
+        </div>
+
+        <!-- 3. المميزات الرئيسية -->
+        <div class="section-block">
+            <div class="text-content">
+                <h3>⚡ Key Features</h3>
+                <ul class="features-list">
+                    <li>Real-Time Human Detection</li>
+                    <li>Object Recognition and Tracking</li>
+                    <li>Suspicious Activity Detection</li>
+                    <li>Instant Alert Notifications</li>
+                    <li>Multi-Camera Monitoring</li>
+                    <li>Event Logging and Video Recording</li>
+                    <li>Centralized Security Dashboard</li>
+                    <li>AI-Based Decision Support</li>
+                </ul>
+            </div>
+            <div class="img-content">
+                <!-- صورة كاميرا Eufy -->
+                <img src="b.png" alt="Surveillance Camera">
+            </div>
+        </div>
+
+        <!-- 4. الأهداف -->
+        <div class="section-block">
+            <div class="text-content">
+                <h3>🎯 System Objectives</h3>
+                <ul class="objectives-list">
+                    <li>Improve facility security and safety.</li>
+                    <li>Reduce reliance on continuous human monitoring.</li>
+                    <li>Detect unusual activities automatically.</li>
+                    <li>Increase response speed during incidents.</li>
+                    <li>Provide a scalable and centralized monitoring solution.</li>
+                </ul>
+            </div>
+            <div class="img-content">
+                <!-- صورة شاشة المراقبة والمكتب -->
+                <img src="c.webp" alt="Control Room Monitoring">
+            </div>
+        </div>
+
+        <!-- 5. التقنيات المستخدمة -->
+        <div class="section-block">
+            <div class="text-content">
+                <h3>🛠️ Technologies Used</h3>
+                <div class="tech-tags-container">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">OpenCV</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">YOLO Object Detection</span>
+                    <span class="tech-tag">Machine Learning</span>
+                    <span class="tech-tag">Deep Learning</span>
+                    <span class="tech-tag">Computer Vision</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. آلية العمل -->
+        <div class="section-block">
+            <div class="text-content">
+                <h3>⚙️ How It Works</h3>
+                <ul class="steps-list">
+                    <li>Surveillance cameras capture live video streams.</li>
+                    <li>Video frames are processed using Computer Vision algorithms.</li>
+                    <li>AI models detect people, objects, and abnormal activities.</li>
+                    <li>Events are analyzed in real time.</li>
+                    <li>Security personnel receive instant alerts.</li>
+                    <li>All events are recorded for future review and analysis.</li>
+                </ul>
+            </div>
+            <div class="img-content">
+                <!-- صورة شاشة المراقبة والمكتب (نفسها) -->
+                <img src="d.png" alt="System Workflow Screen">
+            </div>
+        </div>
+
+        <!-- 7. الأثر المتوقع -->
+        <div class="section-block impact-section">
+            <div class="text-content">
+                <h3>🚀 Expected Impact</h3>
+                <p>The proposed system enhances facility protection through intelligent automation, reduces security risks, improves monitoring efficiency, and provides a modern AI-driven approach to surveillance management.</p>
+            </div>
+        </div>
+
+    </div>
+
+        
+    </div>
+    
+
+</body>
+</html>
